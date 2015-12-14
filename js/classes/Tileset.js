@@ -13,7 +13,7 @@ class Tileset {
 		this.image.src = url;
 	}
 	
-	loadImage () {
+	load () {
 		var tileset = this;
 		return new Promise(function (resolve, reject) {
 			if (tileset.loaded) {
