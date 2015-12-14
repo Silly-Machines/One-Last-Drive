@@ -12,15 +12,9 @@
 	window.addEventListener("resize", setCanvasDimensions, false);
 	console.dir(G);
 	
-	G.ctx.fillStyle = "red";
-	G.ctx.fillRect(0, 0, G.w, G.h);
-	
 	var voiture = new Tileset("assets/images/tesla-model-x-rear.png");
 	
-	voiture.loadImage().then(function () {
-	console.dir(voiture);
-		voiture.drawTile(1, G.ctx);
-	});
+	voiture.loadImage();
 	
 	function setCanvasDimensions () {
 		G.w = G.canvas.width;
@@ -28,4 +22,15 @@
 		G.h = G.canvas.height;
 		G.h_p = G.h / 100;
 	}
+	
+	function redraw () {
+		G.ctx.fillStyle = "red";
+		G.ctx.fillRect(0, 0, G.w, G.h);
+		
+		voiture.drawTile(1, G.ctx);
+		
+		requestAnimationFrame(redraw);
+	}
+	
+	requestAnimationFrame(redraw);
 })();

@@ -5,6 +5,8 @@ class Tileset {
 		this.image = new Image();
 		this.image.tilesetRef = this;
 		
+		this.loaded = false;
+		
 		this.tileW = tileW;
 		this.tileH = tileH || tileW;
 		
@@ -14,6 +16,11 @@ class Tileset {
 	loadImage () {
 		var tileset = this;
 		return new Promise(function (resolve, reject) {
+			if (tileset.loaded) {
+				resolve(tileset);
+				return;
+			}
+			
 			tileset.image.onload = function() {
 				if (!this.complete) {
 					throw new Error("Error loading tileset `" + url + "`.");
@@ -51,8 +58,6 @@ class Tileset {
 		
 		var xSource = (tileSrcX - 1) * this.tileW;
 		var ySource = (tileSrcY - 1) * this.tileH;
-		
-		console.log(this.image, xSource, ySource, this.tileW, this.tileH, destX, destY, this.tileW, this.tileH);
 		
 		ctx.drawImage(this.image, xSource, ySource, this.tileW, this.tileH, destX, destY, this.tileW, this.tileH);
 	}
