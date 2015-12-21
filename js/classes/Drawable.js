@@ -29,6 +29,10 @@ class Drawable {
 		this.coords = coords;
 	}
 	
+	setScale (scale) {
+		this.scale = parseFloat(scale);
+	}
+	
 	load () {
 		var drawable = this;
 		
