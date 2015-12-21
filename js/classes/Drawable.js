@@ -63,14 +63,14 @@ class Drawable {
 			var destX = this.coords.x;
 		}
 		else {
-			var destX = Math.round(this.coords.cx - (this.image.naturalWidth / 2));
+			var destX = Math.round(this.coords.cx - ((this.image.naturalWidth / 2) * this.scale));
 		}
 		
 		if (typeof this.coords.y !== "undefined") {
 			var destY = this.coords.y;
 		}
 		else {
-			var destY = Math.round(this.coords.cy - (this.image.naturalHeight / 2));
+			var destY = Math.round(this.coords.cy - ((this.image.naturalHeight / 2) * this.scale));
 		}
 		
 		var srcX = 0;
