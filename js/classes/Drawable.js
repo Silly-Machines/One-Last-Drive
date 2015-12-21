@@ -1,15 +1,20 @@
 "use strict";
 
 class Drawable {
-	constructor() {
+	constructor (url) {
+		if (url) {
+			this.assetSrc = url;
+		}
+		
 		this.loaded = false;
 	}
 	
-	loadAsset (url) {
+	loadImage () {
 		var drawable = this;
 		
 		this.image = new Image();
 		this.image.drawableRef = this;
+		this.image.src = this.assetSrc;
 		
 		return new Promise(function (resolve, reject) {
 			if (drawable.loaded) {
@@ -17,7 +22,7 @@ class Drawable {
 				return;
 			}
 			
-			tileset.image.onload = function() {
+			drawable.image.onload = function() {
 				if (!this.complete) {
 					throw new Error("Error loading drawable `" + url + "`.");
 				}

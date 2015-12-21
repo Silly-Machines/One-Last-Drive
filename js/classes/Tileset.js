@@ -1,47 +1,28 @@
 "use strict";
 
 class Tileset extends Drawable {
-	constructor(url, tileW, tileH) {
-		super();
-		
-		this.image = new Image();
-		this.image.tilesetRef = this;
+	constructor (url, tileW, tileH) {
+		super(url);
 		
 		this.loaded = false;
 		
 		this.tileW = tileW;
 		this.tileH = tileH || tileW;
-		
-		this.image.src = url;
 	}
 	
 	load () {
 		var tileset = this;
-		return new Promise(function (resolve, reject) {
-			if (tileset.loaded) {
-				resolve(tileset);
-				return;
+		
+		return this.loadImage().then(function () {
+			if (!tileset.tileW) {
+				tileset.tileW = tileset.image.naturalWidth;
 			}
 			
-			tileset.image.onload = function() {
-				if (!this.complete) {
-					throw new Error("Error loading tileset `" + url + "`.");
-				}
-				
-				if (!this.tilesetRef.tileW) {
-					this.tilesetRef.tileW = this.naturalWidth;
-				}
-				
-				if (!this.tilesetRef.tileH) {
-					this.tilesetRef.tileH = this.naturalHeight;
-				}
-				
-				this.tilesetRef.tilesPerRow = this.width / this.tilesetRef.tileW;
-				
-				tileset.loaded = true;
-				
-				resolve(tileset);
+			if (!tileset.tileH) {
+				tileset.tileH = tileset.image.naturalHeight;
 			}
+			
+			tileset.tilesPerRow = tileset.image.naturalWidth / tileset.tileW;
 		});
 	}
 	
