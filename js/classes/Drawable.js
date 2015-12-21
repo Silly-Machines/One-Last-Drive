@@ -2,11 +2,15 @@
 
 class Drawable {
 	constructor() {
-		this.loaded = true;
+		this.loaded = false;
 	}
 	
-	loadAsset () {
+	loadAsset (url) {
 		var drawable = this;
+		
+		this.image = new Image();
+		this.image.drawableRef = this;
+		
 		return new Promise(function (resolve, reject) {
 			if (drawable.loaded) {
 				resolve(drawable);
@@ -17,6 +21,8 @@ class Drawable {
 				if (!this.complete) {
 					throw new Error("Error loading drawable `" + url + "`.");
 				}
+				
+				drawable.loaded = true;
 				
 				resolve(drawable);
 			}

@@ -37,6 +37,9 @@ class Tileset extends Drawable {
 				}
 				
 				this.tilesetRef.tilesPerRow = this.width / this.tilesetRef.tileW;
+				
+				tileset.loaded = true;
+				
 				resolve(tileset);
 			}
 		});
@@ -44,7 +47,7 @@ class Tileset extends Drawable {
 	
 	drawTile (nb, ctx, destX, destY) {
 		if (!this.loaded) {
-			throw new Error('Drawable not loaded');
+			throw new Error('Tileset not loaded');
 		}
 		
 		if (destX === undefined) {

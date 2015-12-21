@@ -19,15 +19,19 @@
 	window.addEventListener("resize", G.setCanvasDimensions, false);
 	
 	G.redraw = function () {
-		G.ctx.clearRect(0, 0, G.w, G.h);
-		
-		G.ctx.fillStyle = "red";
-		G.ctx.fillRect(0, 0, G.w, G.h);
-		
-		for (var id in G.tilesets) {
-			G.tilesets[id].drawTile(1, G.ctx);
+		try {
+			G.ctx.clearRect(0, 0, G.w, G.h);
+			
+			G.ctx.fillStyle = "red";
+			G.ctx.fillRect(0, 0, G.w, G.h);
+			
+			for (var id in G.tilesets) {
+				G.tilesets[id].drawTile(1, G.ctx);
+			}
 		}
-		
+		catch(e) {
+			console.error(e);
+		}
 		requestAnimationFrame(G.redraw);
 	}
 	
