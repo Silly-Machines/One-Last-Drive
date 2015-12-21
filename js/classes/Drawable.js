@@ -84,16 +84,16 @@ class Drawable {
 		
 		if (boundingRect) {
 			if (typeof boundingRect.x !== "undefined") {
-				srcX = boundingRect.x;
+				srcX = parseInt(boundingRect.x);
 			}
 			if (typeof boundingRect.y !== "undefined") {
-				srcY = boundingRect.y;
+				srcY = parseInt(boundingRect.y);
 			}
 			if (typeof boundingRect.w !== "undefined") {
-				srcW = boundingRect.w;
+				srcW = parseInt(boundingRect.w);
 			}
 			if (typeof boundingRect.h !== "undefined") {
-				srcH = boundingRect.h;
+				srcH = parseInt(boundingRect.h);
 			}
 		}
 		
