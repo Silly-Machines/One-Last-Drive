@@ -6,6 +6,7 @@
 	};
 	G.canvas.width = document.body.clientWidth;
 	G.canvas.height = document.body.clientHeight;
+	G.scale = Math.min(G.canvas.width / 800, G.canvas.height / 600);
 	G.ctx = G.canvas.getContext("2d");
 	
 	G.setCanvasDimensions = function () {
