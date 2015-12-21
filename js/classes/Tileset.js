@@ -1,7 +1,9 @@
 "use strict";
 
-class Tileset {
+class Tileset extends Drawable {
 	constructor(url, tileW, tileH) {
+		super();
+		
 		this.image = new Image();
 		this.image.tilesetRef = this;
 		
@@ -41,6 +43,10 @@ class Tileset {
 	}
 	
 	drawTile (nb, ctx, destX, destY) {
+		if (!this.loaded) {
+			throw new Error('Drawable not loaded');
+		}
+		
 		if (destX === undefined) {
 			destX = 0;
 		}
