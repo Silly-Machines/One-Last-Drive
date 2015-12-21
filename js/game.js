@@ -26,6 +26,9 @@
 			G.ctx.fillStyle = "red";
 			G.ctx.fillRect(0, 0, G.w, G.h);
 			
+			for (var id in G.drawables) {
+				G.drawables[id].draw(G.ctx);
+			}
 			for (var id in G.tilesets) {
 				G.tilesets[id].drawTile(1, G.ctx);
 			}
@@ -34,6 +37,16 @@
 			console.error(e);
 		}
 		requestAnimationFrame(G.redraw);
+	}
+	
+	G.drawables = {};
+	
+	G.registerDrawable = function (id, src) {
+		G.drawables[id] = new Drawable(src);
+		return G.drawables[id];
+	}
+	G.getDrawable = function (id) {
+		return G.drawables[id];
 	}
 	
 	G.tilesets = {};
@@ -57,8 +70,9 @@
 	}
 	
 	G.loadAssets([
-		G.registerTileset("voiture", "assets/images/tesla-model-x-rear.png")
+		G.registerDrawable("voiture", "assets/images/tesla-model-x-rear.png")
 	]).then(function () {
+		G.getDrawable("voiture").setCoordinates({ cx: G.w / 2, cy: G.h / 2 });
 		requestAnimationFrame(G.redraw);
 	});
 	

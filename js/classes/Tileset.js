@@ -13,7 +13,7 @@ class Tileset extends Drawable {
 	load () {
 		var tileset = this;
 		
-		return this.loadImage().then(function () {
+		return super.load().then(function () {
 			if (!tileset.tileW) {
 				tileset.tileW = tileset.image.naturalWidth;
 			}
