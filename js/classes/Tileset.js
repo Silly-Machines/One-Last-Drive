@@ -26,16 +26,9 @@ class Tileset extends Drawable {
 		});
 	}
 	
-	drawTile (nb, ctx, destX, destY) {
+	drawTile (nb, ctx) {
 		if (!this.loaded) {
 			throw new Error('Tileset not loaded');
-		}
-		
-		if (destX === undefined) {
-			destX = 0;
-		}
-		if (destY === undefined) {
-			destY = 0;
 		}
 		
 		var tileSrcX = nb % this.tilesPerRow;
@@ -49,6 +42,6 @@ class Tileset extends Drawable {
 		var xSource = (tileSrcX - 1) * this.tileW;
 		var ySource = (tileSrcY - 1) * this.tileH;
 		
-		ctx.drawImage(this.image, xSource, ySource, this.tileW, this.tileH, destX, destY, this.tileW, this.tileH);
+		super.draw(ctx, { x: xSource, y: ySource, w: this.tileW, h: this.tileH });
 	}
 }

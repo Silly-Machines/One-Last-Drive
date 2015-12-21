@@ -54,7 +54,7 @@ class Drawable {
 		});
 	}
 	
-	draw (ctx) {
+	draw (ctx, boundingRect) {
 		if (!this.loaded) {
 			throw new Error('Drawable not loaded');
 		}
@@ -73,6 +73,26 @@ class Drawable {
 			var destY = Math.round(this.coords.cy - (this.image.naturalHeight / 2));
 		}
 		
-		ctx.drawImage(this.image, 0, 0, this.image.naturalWidth, this.image.naturalHeight, destX, destY, this.image.naturalWidth * this.scale, this.image.naturalHeight * this.scale);
+		var srcX = 0;
+		var srcY = 0;
+		var srcW = this.image.naturalWidth;
+		var srcH = this.image.naturalHeight;
+		
+		if (boundingRect) {
+			if (typeof boundingRect.x !== "undefined") {
+				srcX = boundingRect.x;
+			}
+			if (typeof boundingRect.y !== "undefined") {
+				srcY = boundingRect.y;
+			}
+			if (typeof boundingRect.w !== "undefined") {
+				srcW = boundingRect.w;
+			}
+			if (typeof boundingRect.h !== "undefined") {
+				srcH = boundingRect.h;
+			}
+		}
+		
+		ctx.drawImage(this.image, srcX, srcY, srcW, srcH, destX, destY, srcW * this.scale, srcH * this.scale);
 	}
 }
