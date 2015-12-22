@@ -74,7 +74,7 @@
 		G.registerDrawable("voiture", "assets/images/tesla-model-x-rear.png")
 	]).then(function () {
 		G.getDrawable("voiture").setScale(.5);
-		G.getDrawable("voiture").setCoordinates({ cx: G.w / 2, cy: G.h / 2 });
+		G.getDrawable("voiture").moveTo({ cx: G.w / 2, cy: G.h / 2 });
 		requestAnimationFrame(G.redraw);
 	});
 	

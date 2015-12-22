@@ -13,7 +13,7 @@ class Drawable {
 		this.coords = { x: 0, y: 0, z: 0 };
 	}
 	
-	setCoordinates (coords) {
+	moveTo (coords) {
 		if (typeof coords.x === "undefined" && typeof coords.cx === "undefined") {
 			throw new TypeError("Coordinates need a `x` or `cx` attribute");
 		}
