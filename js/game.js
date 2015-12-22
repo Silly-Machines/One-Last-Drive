@@ -71,10 +71,11 @@
 	}
 	
 	G.loadAssets([
-		G.registerDrawable("voiture", "assets/images/tesla-model-x-rear.png")
+		G.registerDrawable("car", "assets/images/tesla-model-x-rear.png")
 	]).then(function () {
-		G.getDrawable("voiture").setScale(.5);
-		G.getDrawable("voiture").moveTo({ cx: G.w / 2, cy: G.h / 2 });
+		var car = G.getDrawable("car");
+		car.setScale(.5);
+		car.moveTo({ cx: G.w / 2, cy: G.h - ((car.h * car.scale ) / 2) });
 		requestAnimationFrame(G.redraw);
 	});
 	
