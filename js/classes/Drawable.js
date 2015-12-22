@@ -13,6 +13,28 @@ class Drawable {
 		this.coords = { x: 0, y: 0, z: 0 };
 	}
 	
+	move (x, y, z) {
+		if (typeof this.coords.x !== "undefined") {
+			this.coords.x += x;
+		}
+		else {
+			this.coords.cx += x;
+		}
+		
+		if (typeof this.coords.y !== "undefined") {
+			this.coords.y += y;
+		}
+		else {
+			this.coords.cy += y;
+		}
+		
+		if (typeof z !== "undefined") {
+			if (typeof this.coords.z !== "undefined") {
+				this.coords.z += z;
+			}
+		}
+	}
+	
 	moveTo (coords) {
 		if (typeof coords.x === "undefined" && typeof coords.cx === "undefined") {
 			throw new TypeError("Coordinates need a `x` or `cx` attribute");
