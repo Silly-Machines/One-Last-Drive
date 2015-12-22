@@ -75,6 +75,9 @@ class Drawable {
 				
 				drawable.loaded = true;
 				
+				drawable.w = this.naturalWidth;
+				drawable.h = this.naturalHeight;
+				
 				resolve(drawable);
 			}
 		});
