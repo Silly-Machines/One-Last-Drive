@@ -8,6 +8,8 @@ class Tileset extends Drawable {
 		
 		this.tileW = tileW;
 		this.tileH = tileH || tileW;
+		
+		this.tiles = [];
 	}
 	
 	load () {
@@ -23,25 +25,35 @@ class Tileset extends Drawable {
 			}
 			
 			tileset.tilesPerRow = tileset.image.naturalWidth / tileset.tileW;
+			tileset.tilesRows = tileset.image.naturalHeight / tileset.tileH;
+			
+			var nb = 0;
+			
+			for (var y = 0; y < tileset.image.naturalHeight; y += tileset.tileH) {
+				for (var x = 0; x < tileset.image.naturalWidth; x += tileset.tileW) {
+					tileset.tiles[nb] = new Tile(tileset, x, y, tileset.tileW, tileset.tileH);
+					nb++;
+				}
+			}
 		});
+	}
+	
+	getTile (nb) {
+		if (!nb instanceof Number) {
+			throw new TypeError("Invalide tile number");
+		}
+		if (!this.tiles[nb]) {
+			throw new RangeError("Tile number `" + nb + "` doesn't exist");
+		}
 	}
 	
 	drawTile (nb, ctx) {
 		if (!this.loaded) {
-			throw new Error('Tileset not loaded');
+			throw new Error("Tileset not loaded");
 		}
 		
-		var tileSrcX = nb % this.tilesPerRow;
+		var tile = this.getTile(nb);
 		
-		if(tileSrcX === 0) {
-			tileSrcX = this.tilesPerRow;
-		}
-		
-		var tileSrcY = Math.ceil(nb / this.tileH);
-		
-		var xSource = (tileSrcX - 1) * this.tileW;
-		var ySource = (tileSrcY - 1) * this.tileH;
-		
-		super.draw(ctx, { x: xSource, y: ySource, w: this.tileW, h: this.tileH });
+		tile.draw(ctx);
 	}
 }
